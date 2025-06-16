@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroBoss - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --background-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success: #059669;
+            --success-hover: #047857;
+            --accent: #7c3aed;
+            --accent-hover: #6d28d9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .welcome-section {
+            margin-bottom: 2rem;
+        }
+
+        .welcome-section h1 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .location {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card.blue {
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .card.green {
+            border-top: 4px solid var(--success);
+        }
+
+        .card.purple {
+            border-top: 4px solid var(--accent);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .button.blue {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .button.blue:hover {
+            background-color: var(--primary-blue-hover);
+        }
+
+        .button.green {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .button.green:hover {
+            background-color: var(--success-hover);
+        }
+
+        .button.purple {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .button.purple:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .logout-button {
+            background-color: #ef4444;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="welcome-section">
+            <h1>Welcome, {{ user.username }}</h1>
+            <p class="location">Location: {{ user.profile.location }}</p>
+        </div>
+        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </div>
+
+    <h2 class="section-title">What MicroBoss does?</h2>
+
+    <div class="cards-container">
+        <div class="card blue">
+            <h3>Explore Toolkits</h3>
+            <p>Access our comprehensive collection of tools and resources designed to help you succeed in your entrepreneurial journey.</p>
+            <a href="{% url 'toolkits' %}" class="button blue">Explore</a>
+        </div>
+
+        <div class="card green">
+            <h3>Join The Movement</h3>
+            <p>Become part of our growing community of entrepreneurs and innovators shaping the future of business.</p>
+            <a href="{% url 'waitlist' %}" class="button green">Join</a>
+        </div>
+
+        <div class="card purple">
+            <h3>Find Founders and Mentors</h3>
+            <p>Connect with experienced entrepreneurs and mentors who can guide you through your business journey.</p>
+            <button class="button purple">Explore</button>
+        </div>
+    </div>
+</body>
+</html>
